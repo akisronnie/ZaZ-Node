@@ -1,0 +1,62 @@
+    
+<div id="app3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainmenu">
+            <div class="navbar-brand tilt app2" id="app-2" >
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Seattle_redhawks_logo.png"  width="40" v-bind:title="message" >
+            </div>
+            <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" > 
+                        <button class="btn btn-outline-success my-2 my-sm-0 disabled"   type="submit" style="border:none;">
+                            <i class="far fa-clock"></i><span id="clock"> 00:00:00</span></button></a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link ">
+                      <button class="btn btn-outline-primary links"  type="submit" id="abc" value = '/history'>
+                    <i class="fas fa-history"></i> История</button></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link">
+                    <button class="btn btn-outline-primary links" type="submit" id="abc" value="/chat" >
+                      <i class="fas fa-receipt"></i> Чат</button></a>
+                </li>
+            
+                  
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <button class="btn btn-outline-primary my-2 my-sm-0 " type="submit" id="abc" >
+                          <i class="fas fa-money-bill-alt"></i> Продажа</button>
+                  </a>
+                  <div class="dropdown-menu " style="background-image:url(http://user-master.org/media/k2/items/cache/c10c64c27e0606d1654b81b9bb482558_XL.jpg) " aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item"  href="#" ><i class="fas fa-car"></i>  Авто</a>
+                    <a class="dropdown-item"  href="#"><i class="fas fa-screwdriver"></i> Запчасти</a>
+                    <div class="dropdown-divider"></div>
+                  </div>
+                </li>
+                
+               </ul>
+               
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="login" placeholder="Логин" aria-label="Login" v-model="hellow" id="app1" >
+                <input class="form-control mr-sm-2" type="search" placeholder="Пароль" aria-label="Password">
+              </form>
+        
+                <button class="btn btn-outline-success my-2 my-sm-0 " type="submit" id="abc"><i class="fas fa-sign-in-alt"></i> Вход</button>
+                <button class="btn btn-outline-success my-2 my-sm-0 " type="submit" style="margin-left: 5px;" id="abc" ><i class="fas fa-registered"></i> Регистрация</button>
+                
+            </div>
+          </nav>
+           <div >
+          
+        </div>
+        
+        
+        
+        
+        <div id="app" class="helloMsg" >{{pref}}{{hellow}}
+           </div>
