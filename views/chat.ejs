@@ -4,23 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/chat.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="public/css/main.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>ZaZ 965</title>
-    <style>
-            
-            
-            #chatForm {width: 100%;padding: 3px; margin-top: 10px;}
-            #m { border: 0; padding: 10px; min-width:85%; margin-right: .5%; border-radius: 5px;}
-            #formbtn { padding: 10px; border-radius: 5px; }
-            #messages { list-style-type: none; margin: 0; padding: 0; }
-            #messages li { padding: 5px 10px; }
-            
-        </style>
-
-
 </head>
 <body>
         <script src="/public/js/vue.js"></script>
@@ -29,19 +21,21 @@
     <%include blocks/header.ejs%>
 
 <br><br>
-<aside id="box" v-show="show"  transition="slide" class="boxx" style="background-image: url(http://aslania.com/wp-content/uploads/2018/03/black-background-wallpaper-4.jpg)"> 
-    <ul id="messages"></ul>
-    
+<aside id="box" v-show="show"  transition="slide" class="boxx layer" style="background-image: url(http://aslania.com/wp-content/uploads/2018/03/black-background-wallpaper-4.jpg)"> 
+    <div class="layer" id="chat_result">
+            <ul id="messages"></ul>
+            </div>
 
-    <form action="" id='chatForm'>
-        <input id="m" autocomplete="off" autofocus /><button id="formbtn" class="btn-outline-success">Отправить</button>
-    </form>
+            <div style="text-align:center; color: palegreen; font-size: 20px;">Your name:  <%= data.username %> </div>
+            
+        </aside>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
-    <script>
-        $(function () {
+        <form action="">
+            <input id="m" autocomplete="off" autofocus /><button>Send</button>
+        </form>
+        
+        <script>
+           $(function () {
             var socket = io();
             $('form').submit(function(){
                 socket.emit('chat message', $('#m').val());
@@ -49,14 +43,19 @@
                 return false;
             });
             socket.on('chat message', function(msg){
-                $('#messages').append($('<li>').text(msg));
+               
+                $('#messages').append($('<li>').text("<%=  data.username %> "+": "+msg));
+                    var block = document.getElementById("chat_result");
+                block.scrollTop = block.scrollHeight;
             });
         });
-    </script>
-  </aside>
-<br>
+        </script>
+    
 
-<div class="col-md-12 bottom" v-show="show"  transition="slide" >Все права защищены Зазоводами 2018</div>
+ 
+
+
+<div class="col-md-12 bottom"  >Все права защищены Зазоводами 2018</div>
 </div>
 
 <script src="/public/js/main.js"></script>
