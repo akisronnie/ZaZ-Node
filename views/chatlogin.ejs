@@ -29,26 +29,26 @@
     <%include blocks/header.ejs%>
 
 <br><br>
-<aside id="box" v-show="show"  transition="slide" class="boxx" style="background-image: url(http://aslania.com/wp-content/uploads/2018/03/black-background-wallpaper-4.jpg)"> 
-    <div id="clock" style="text-align:center; color: palegreen; font-size: 20px;"></div>
-    <form method="post" action="/chat">
-        <div class="form-group">
-          <label for="app1">Please enter your name!</label>
-          <input type="username" name="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" >
-        </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-  </aside>
-<br>
 
-        <div class="col-md-12 bottom" >All rights reserved</div>
+        <br><br>
+        <aside id="box" v-show="show"  transition="slide" class="boxx" style="background-color: black;"> 
+           
+            <form method="post" action="/chat">
+                <div class="form-group">
+                  <label for="app1">Пожалуйста введите свое имя!</label>
+                  <input type="username" name="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter a name" v-model="hellow" id="app1">
+                </div>
+                  <button type="submit" class="btn btn-primary">Вход в чат</button>
+              </form>
+        </aside>
+        <br>
+        <div id="app" class="helloMsg" >{{pref}}{{hellow}}
+        <div class="col-md-12 bottom" >Все права защищены Зазоводами 2018</div>
         <script src="/public/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        
-<div class="col-md-12 bottom" v-show="show"  transition="slide" >Все права защищены Зазоводами 2018</div>
-</div>
-
+        </div>
 <script src="/public/js/main.js"></script>
+<script src="/public/js/chat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 

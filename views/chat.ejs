@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="public/css/chat.css" />
@@ -11,56 +9,67 @@
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="public/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/chat.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>ZaZ 965</title>
 </head>
 <body>
+
         <script src="/public/js/vue.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
     <%include blocks/header.ejs%>
-
-<br><br>
-<aside id="box" v-show="show"  transition="slide" class="boxx layer" style="background-image: url(http://aslania.com/wp-content/uploads/2018/03/black-background-wallpaper-4.jpg)"> 
-    <div class="layer" id="chat_result">
+        <div class="layer" id="chat_result">
             <ul id="messages"></ul>
             </div>
-
-            <div style="text-align:center; color: palegreen; font-size: 20px;">Your name:  <%= data.username %> </div>
-            
-        </aside>
-
-        <form action="">
-            <input id="m" autocomplete="off" autofocus /><button>Send</button>
+            <div style="text-align:center; color: palegreen; font-size: 20px;">Your name:  <span id='user'><%= data.username %> </span></div>
+            <div id="clock" style="text-align:center; color: palegreen; font-size: 20px;"></div>
+            <!-- <div id ='userlist'>  <%= data.userlist %> -->
+            <span style="font-size: 20px; color: red">В ЧАТЕ:</span><span id ='userlist' style="font-size: 20px; color: aliceblue;">    </span>
+        <form action="" id="chatform">
+            <input id="m" autocomplete="off" autofocus /><button id="formbutton">Send</button>
         </form>
-        
         <script>
-           $(function () {
-            var socket = io();
-            $('form').submit(function(){
-                socket.emit('chat message', $('#m').val());
-                $('#m').val('');
-                return false;
+            $(function () {
+              d = document.getElementById("user");
+              g = document.getElementById("userlist");
+            var username = d.innerHTML;
+            var userlisten=[];
+            g.innerHTML=userlisten;
+              var socket = io();
+              $('form').submit(function(){
+              socket.emit('chat message', (username +': ' +$('#m').val()));
+              $('#m').val('');
+              return false;
+              });
+        
+        
+        
+        
+        socket.on('chatlog', function(chatlog){
+        for(i=0; i<chatlog.length; i++ ){
+              $('#messages').append($('<li>').text(chatlog[i]));
+                  var block = document.getElementById("chat_result");
+                  block.scrollTop = block.scrollHeight;}
+                 
+        
+              });
+        
+        
+        
+        
+              socket.on('chat message', 
+              function(msg, userlist){
+              $('#messages').append($('<li>').text(msg));
+                  var block = document.getElementById("chat_result");
+                  block.scrollTop = block.scrollHeight;
+                  userlisten=userlist;
+                  g.innerHTML=userlisten;
+        
+              });
             });
-            socket.on('chat message', function(msg){
-               
-                $('#messages').append($('<li>').text("<%=  data.username %> "+": "+msg));
-                    var block = document.getElementById("chat_result");
-                block.scrollTop = block.scrollHeight;
-            });
-        });
-        </script>
-    
-
- 
-
-
-<div class="col-md-12 bottom"  >Все права защищены Зазоводами 2018</div>
-</div>
-
-<script src="/public/js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
+            </script>
+        <script src="/public/js/main.js"></script>
 </body>
 </html>
+

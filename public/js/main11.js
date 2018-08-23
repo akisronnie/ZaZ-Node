@@ -9,16 +9,20 @@ function printTime() {
  document.getElementById('clock').innerHTML=" "+h+":"+m+":"+s;
 }
 setInterval(printTime, 1000);
-
-
-var da = { hellow: '',
+var app2 = new Vue({
+    el: '#app-2',
+    data: {
+      message: 'Вы загрузили эту страницу в: ' + new Date().toLocaleString()
+    }
+  })
+  var da = { hellow: '',
              pref:""
              }
-var app1 = new Vue({
+  var app1 = new Vue({
     el: '#app',
     data: da 
   })
-var app2 = new Vue({
+  var app2 = new Vue({
     el: '#app1',
     data:  da
   })
